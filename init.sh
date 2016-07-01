@@ -39,11 +39,11 @@ sed -i "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/rpmforge.repo
 echo
 
 echo "=> Package"
-echo -n "  => sudo..." && yum -y install sudo > /dev/null
-echo -n "  => wget..." && yum -y install wget > /dev/null
-echo -n "  => nmap..." && yum -y install nmap > /dev/null
-echo -n "  => zsh...." && yum -y install zsh  > /dev/null
-echo -n "  => htop..." && yum -y install htop --enablerepo=epel > /dev/null
+echo "  => sudo..." && yum -y install sudo > /dev/null
+echo "  => wget..." && yum -y install wget > /dev/null
+echo "  => nmap..." && yum -y install nmap > /dev/null
+echo "  => zsh...." && yum -y install zsh  > /dev/null
+echo "  => htop..." && yum -y install htop --enablerepo=epel > /dev/null
 echo
 
 echo "=> Cron package"
@@ -59,7 +59,7 @@ systemctl enable chronyd  > /dev/null
 chronyc sources           > /dev/null
 
 echo "=> chef-client"
-curl -L https://www.opscode.com/chef/install.sh | bash
+curl -s -S -L https://www.opscode.com/chef/install.sh | bash
 echo
 
 echo "=> Backup"
