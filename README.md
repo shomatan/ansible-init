@@ -6,5 +6,5 @@ Configure your own minimal CentOS 7.
 
 ## Usage
 ```
-curl https://raw.githubusercontent.com/shomatan/init-scripts/master/init.sh | bash
+curl -sS https://raw.githubusercontent.com/shomatan/init-scripts/master/init.sh | bash
 ```
