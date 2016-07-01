@@ -68,3 +68,6 @@ groupadd backup
 echo "  => Create backup user..."
 useradd -g backup -s /bin/false backup
 echo
+
+echo "=> Change shell"
+chsh -s /bin/zsh
