@@ -10,6 +10,3 @@ git clone https://github.com/neovim/neovim
 cd neovim
 make          > /dev/null
 make install  > /dev/null
-
-echo "=> Install python3"
-yum -y install zlib-devel bzip2 bzip2-devel readline readline-devel sqlite sqlite-devel openssl openssl-devel > /dev/null
