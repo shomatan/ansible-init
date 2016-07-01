@@ -1,5 +1,5 @@
 #!/bin/bash
-# Common install script for Centos 7.2.1511
+# Common install script for Centos 7.2-1511
 
 #####################################################################
 
