@@ -33,7 +33,6 @@ rpm -ivh     http://rpms.famillecollet.com/enterprise/remi-release-7.rpm > /dev/
 sed -i "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/remi.repo
 sed -i "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/remi-safe.repo
 echo "  => rpmForge"
-rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
 rpm -ivh http://ftp.riken.jp/Linux/dag/redhat/el7/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm > /dev/null
 sed -i "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/rpmforge.repo
 echo
