@@ -11,9 +11,9 @@ echo "=> Disable selinux"
 setenforce 0
 sed -i "s/^SELINUX=.*/SELINUX=disabled/" /etc/selinux/config
 
-echo '=> GRUB'
-sed -i.orig -r '/^GRUB_CMDLINE_LINUX=/s/\s+rhgb//' /etc/default/grub
-grub2-mkconfig -o /boot/grub2/grub.cfg
+#echo '=> GRUB'
+#sed -i.orig -r '/^GRUB_CMDLINE_LINUX=/s/\s+rhgb//' /etc/default/grub
+#grub2-mkconfig -o /boot/grub2/grub.cfg
 
 echo "=> Set for only the administrator can become a root"
 sed -i 's/^.*auth.*required.*pam_wheel.so use_uid/auth\t\trequired\tpam_wheel.so use_uid/g' /etc/pam.d/su
