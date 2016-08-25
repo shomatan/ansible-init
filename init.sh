@@ -21,6 +21,9 @@ sed -i 's/^.*auth.*required.*pam_wheel.so use_uid/auth\t\trequired\tpam_wheel.so
 echo "=> Accept sudo without the only wheel group"
 sed -i "s/^Defaults.*requiretty/Defaults:%wheel    !requiretty/" /etc/sudoers
 
+echo "=> sudo secure path"
+sed -i "s/^Defaults    secure_path.*/Defaults    secure_path = \/sbin:\/bin:\/usr\/sbin:\/usr\/bin:\/usr\/local\/bin/" /etc/sudoers
+
 echo "=> Repository"
 echo "  => epel"
 rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
