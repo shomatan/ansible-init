@@ -43,7 +43,7 @@ echo "  => wget..." && yum -y install wget > /dev/null
 echo "  => nmap..." && yum -y install nmap > /dev/null
 echo "  => zsh...." && yum -y install zsh  > /dev/null
 echo "  => htop..." && yum -y install htop --enablerepo=epel > /dev/null
-echo "  => screen..." && yum -y screen sudo > /dev/null
+echo "  => screen..." && yum -y install screen > /dev/null
 echo
 
 echo "=> Cron package"
