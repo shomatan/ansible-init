@@ -11,6 +11,10 @@ echo "=> Disable selinux"
 setenforce 0
 sed -i "s/^SELINUX=.*/SELINUX=disabled/" /etc/selinux/config
 
+echo "=> Disable NetworkManager"
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+
 #echo '=> GRUB'
 #sed -i.orig -r '/^GRUB_CMDLINE_LINUX=/s/\s+rhgb//' /etc/default/grub
 #grub2-mkconfig -o /boot/grub2/grub.cfg
