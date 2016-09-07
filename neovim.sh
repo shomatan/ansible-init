@@ -3,10 +3,15 @@
 
 #####################################################################
 
-echo "=> Build neovim"
-yum -y install libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip > /dev/null
-cd /usr/local/src
-git clone https://github.com/neovim/neovim
-cd neovim
-make          > /dev/null
-make install  > /dev/null
+echo "=> Install neovim"
+cat << EOF > /etc/yum.repos.d/dperson-neovim-epel-7.repo
+[dperson-neovim]
+name=Copr repo for neovim owned by dperson
+baseurl=https://copr-be.cloud.fedoraproject.org/results/dperson/neovim/epel-7-\$basearch/
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/dperson/neovim/pubkey.gpg
+enabled=0
+EOF
+
+yum -y install neovim --enablerepo=dperson-neovim,epel
