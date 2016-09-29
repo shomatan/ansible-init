@@ -1,5 +1,81 @@
 ---
+# selinux
 - name: Check the selinux status.
   command: getenforce
   register: result
   changed_when: False
+
+- name: Ensure selinux is disabled.
+  command: setenforce 0
+  when: '"Disabled" not in result.stdout'
+
+- name: Ensure selinux is disabled permanently.
+  lineinfile:
+    dest: /etc/selinux/config
+    regexp: "^SELINUX=.*"
+    line: "SELINUX=disabled"
+
+# NetworkManager
+- name: Ensure NetworkManager is stopped and disabled to start at boot.
+  service: name=NetworkManager state=stopped enabled=no
+  when: init_networkmanager_enable != true
+
+# root user
+- name: Ensure only the administrator can become a root.
+  lineinfile:
+    dest: /etc/pam.d/su
+    regexp: "^.*auth.*required.*pam_wheel.so use_uid"
+    line: "auth		required	pam_wheel.so use_uid"
+
+- name: Ensure sudo without the only wheel group.
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^Defaults.*requiretty"
+    line: "Defaults:%wheel    !requiretty"
+
+- name: Edit sudo secure path.
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^Defaults    secure_path.*"
+    line: "Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin"
+
+# repositories
+- name: Ensure repository {{ item }} is installed.
+  yum: name={{ item }}
+  with_items:
+    - epel-release
+    - http://rpms.famillecollet.com/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm
+
+# packages
+- name: Ensure repository {{ item }} is disabled.
+  replace: dest=/etc/yum.repos.d/{{ item }} regexp="enabled *= *1" replace="enabled=0"
+  with_items:
+    - epel.repo
+    - remi.repo
+
+- name: Ensure useful packages are installed.
+  yum: name={{ item }}
+  with_items:
+    - sudo
+    - wget
+    - nmap
+    - zsh
+    - screen
+
+- name: Ensure htop is installed
+  yum: name=htop enablerepo=epel
+
+- name: Ensure build packages are intalled.
+  yum: name={{ item }}
+  with_items:
+    - libtool
+    - autoconf
+    - automake
+    - cmake
+    - gcc
+    - gcc-c++
+    - make
+    - pkgconfig
+    - unzip
+
+# shell
