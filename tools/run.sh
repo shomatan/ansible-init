@@ -3,9 +3,8 @@
 #####################################################################
 
 yum -y install epel-release
-rpm --import http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
 sed -i "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/epel.repo
-
+yum -y install ansible --enablerepo=epel
 
 # echo "=> Disable selinux"
 # setenforce 0

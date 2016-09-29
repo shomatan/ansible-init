@@ -1,1 +1,5 @@
 ---
+- name: Check the selinux status.
+  command: getenforce
+  register: result
+  changed_when: False
