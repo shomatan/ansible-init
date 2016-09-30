@@ -33,6 +33,7 @@
   with_items:
     - epel.repo
     - remi.repo
+    - remi-safe.repo
 
 - name: Ensure useful packages are installed.
   yum: name={{ item }}
