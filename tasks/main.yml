@@ -83,7 +83,10 @@
 # shell
 - name: Ensure default shell is zsh.
   command: chsh -s /bin/zsh
+  register: result
+  changed_when: '"Shell not changed" not in result.stderr'
   when: lookup('env', 'SHELL') != '/bin/zsh'
+
 
 # cron
 - name: Ensure cronie-anacron is removed.
