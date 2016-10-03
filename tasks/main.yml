@@ -10,7 +10,7 @@
 
 - name: Ensure selinux is disabled.
   command: setenforce 0
-  when: '"Disabled" not in result.stdout'
+  when: ("Disabled" not in result.stdout) and ("Permissive" not in result.stdout)
 
 - name: Ensure selinux is disabled permanently.
   lineinfile:
@@ -93,7 +93,6 @@
   register: result
   changed_when: '"Shell not changed" not in result.stderr'
   when: lookup('env', 'SHELL') != '/bin/zsh'
-
 
 # cron
 - name: Ensure cronie-anacron is removed.
