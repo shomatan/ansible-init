@@ -30,7 +30,10 @@
     - epel-release
     - http://rpms.famillecollet.com/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm
 
-# packages
+- name: Fix EPEL repository only RHEL6.
+  replace: dest=/etc/yum.repos.d/epel.repo regexp="mirrorlist=https" replace="mirrorlist=http"
+  when: ansible_distribution_major_version == "6"
+
 - name: Ensure repository {{ item }} is disabled.
   replace: dest=/etc/yum.repos.d/{{ item }} regexp="enabled *= *1" replace="enabled=0"
   with_items:
@@ -38,6 +41,7 @@
     - remi.repo
     - remi-safe.repo
 
+# packages
 - name: Ensure useful packages are installed.
   yum: name={{ item }}
   with_items:
