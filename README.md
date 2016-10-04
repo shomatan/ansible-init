@@ -1,19 +1,14 @@
-init-scripts
-====
-Configure your own minimal CentOS 7.
+# Ansible role: init
 
-## Description
 
-## Usage
+### Requirements
+None.
 
-#### initial script
+### Role variables
+|Key|Type|Description|Default|
+|:--|:---|:----------|:------|
+|init_networkmanager_enable|Bool|NetworkManager enabled.|false|
+|init_repositories|Array|Install repositories.|See `defaults/main.yml`|
 
-```
-curl -sS https://raw.githubusercontent.com/shomatan/init-scripts/master/tools/run.sh | bash
-```
-
-#### install neovim
-
-```
-curl -sS https://raw.githubusercontent.com/shomatan/init-scripts/master/neovim.sh | bash
-```
+### Dependencies
+None.
