@@ -75,11 +75,12 @@
     line: "Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin"
 
 # shell
+- command: echo $SHELL
+  register: result
+  changed_when: False
 - name: Ensure default shell is zsh.
   command: chsh -s /bin/zsh
-  register: result
-  changed_when: '"Shell not changed" not in result.stderr'
-  when: lookup('env', 'SHELL') != '/bin/zsh'
+  when: result.stdout != '/bin/zsh'
 
 # cron
 - name: Include cron tasks.
