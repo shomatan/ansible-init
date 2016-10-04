@@ -1,6 +1,8 @@
 ---
 
-init_networkmanager_enable: false
+init_networkmanager_enabled: false
+init_cron_managed: true
+init_repositories_installed: true
 init_repositories:
   - epel-release
   - http://rpms.famillecollet.com/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm
