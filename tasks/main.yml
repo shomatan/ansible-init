@@ -78,6 +78,7 @@
 - command: echo $SHELL
   register: result
   changed_when: False
+
 - name: Ensure default shell is zsh.
   command: chsh -s /bin/zsh
   when: result.stdout != '/bin/zsh'
