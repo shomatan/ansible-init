@@ -1,5 +1,5 @@
 # Ansible role: init
-
+Initialize tasks.
 
 ### Requirements
 None.
@@ -14,3 +14,13 @@ None.
 
 ### Dependencies
 None.
+
+## Example playbook
+
+```yaml
+- hosts: all
+  roles:
+    - { role: init }
+  vars:
+    init_networkmanager_enabled: true
+```
