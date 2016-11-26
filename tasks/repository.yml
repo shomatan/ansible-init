@@ -1,5 +1,5 @@
 ---
-- name: Ensure repository {{ item }} is installed.
+- name: Ensure repositories are installed.
   yum: name={{ item }}
   with_items:
     - epel-release
