@@ -75,13 +75,13 @@
     line: "Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin"
 
 # shell
-- command: echo $SHELL
+- shell: cat /etc/passwd | grep root
   register: result
   changed_when: False
 
 - name: Ensure default shell is zsh.
   command: chsh -s /bin/zsh
-  when: result.stdout != '/bin/zsh'
+  when: "'/bin/zsh' not in result.stdout"
 
 # cron
 - name: Include cron tasks.
