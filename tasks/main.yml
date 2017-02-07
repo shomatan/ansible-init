@@ -37,7 +37,7 @@
     - wget
     - nmap
     - zsh
-    - screen
+    - tmux
 
 - name: Ensure htop is installed
   yum: name=htop enablerepo=epel
