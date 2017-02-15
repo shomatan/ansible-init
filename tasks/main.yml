@@ -38,7 +38,7 @@
     - nmap
     - zsh
 
-- name: Ensure packages are installed. (use epel)
+- name: Ensure useful packages are installed. (use epel)
   yum: name={{ item }} enablerepo=epel
   with_items:
     - htop
