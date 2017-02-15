@@ -37,10 +37,12 @@
     - wget
     - nmap
     - zsh
-    - tmux
 
-- name: Ensure htop is installed
-  yum: name=htop enablerepo=epel
+- name: Ensure packages are installed. (use epel)
+  yum: name={{ item }} enablerepo=epel
+  with_items:
+    - htop
+    - tmux
 
 - name: Ensure build packages are intalled.
   yum: name={{ item }}
