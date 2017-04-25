@@ -1,7 +1,7 @@
-Ansible role: Ansible
+Ansible role: Init tasks
 =========
 
-Installs ansible.
+Run init tasks.
 
 Requirements
 ------------
