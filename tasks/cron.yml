@@ -1,9 +1,0 @@
----
-- name: Ensure cronie-anacron is removed.
-  yum: name=cronie-anacron state=absent
-
-- name: Ensure cronie-noanacron is installed.
-  yum: name=cronie-noanacron
-
-- name: Ensure cronie-noanacron is started and enabled to start at boot.
-  service: name=crond state=started enabled=yes

@@ -1,7 +1,7 @@
 ---
-# selinux
 - name: Ensure libselinux-python is installed.
-  yum: name=libselinux-python
+  yum: 
+    name: libselinux-python
 
 - name: Check the selinux status.
   command: getenforce
@@ -17,75 +17,3 @@
     dest: /etc/selinux/config
     regexp: "^SELINUX=.*"
     line: "SELINUX=disabled"
-
-# NetworkManager
-- name: Ensure NetworkManager is stopped and disabled to start at boot.
-  service: name=NetworkManager state=stopped enabled=no
-  when: init_networkmanager_enabled != true and ansible_distribution_major_version == "7"
-
-# repositories
-- name: Include repositories installation tasks.
-  include: repository.yml
-  when: init_repositories_installed
-
-# packages
-- name: Ensure useful packages are installed.
-  yum: name={{ item }}
-  with_items:
-    - git
-    - sudo
-    - wget
-    - nmap
-    - zsh
-
-- name: Ensure useful packages are installed. (use epel)
-  yum: name={{ item }} enablerepo=epel
-  with_items:
-    - htop
-    - tmux
-
-- name: Ensure build packages are intalled.
-  yum: name={{ item }}
-  with_items:
-    - libtool
-    - autoconf
-    - automake
-    - cmake
-    - gcc
-    - gcc-c++
-    - make
-    - pkgconfig
-    - unzip
-
-# root user
-- name: Ensure only the administrator can become a root.
-  lineinfile:
-    dest: /etc/pam.d/su
-    regexp: "^.*auth.*required.*pam_wheel.so use_uid"
-    line: "auth		required	pam_wheel.so use_uid"
-
-- name: Ensure sudo without the only wheel group.
-  lineinfile:
-    dest: /etc/sudoers
-    regexp: "^Defaults.*requiretty"
-    line: "Defaults:%wheel    !requiretty"
-
-- name: Edit sudo secure path.
-  lineinfile:
-    dest: /etc/sudoers
-    regexp: "^Defaults    secure_path.*"
-    line: "Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin"
-
-# shell
-- shell: cat /etc/passwd | grep root
-  register: result
-  changed_when: False
-
-- name: Ensure default shell is zsh.
-  command: chsh -s /bin/zsh
-  when: "'/bin/zsh' not in result.stdout"
-
-# cron
-- name: Include cron tasks.
-  include: cron.yml
-  when: init_cron_managed

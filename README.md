@@ -1,7 +1,7 @@
-Ansible role: Init tasks
+Ansible role: SELinux
 =========
 
-Run init tasks.
+Configures `Security-Enhanced Linux`
 
 Requirements
 ------------
@@ -11,7 +11,7 @@ None.
 Role Variables
 --------------
 
-See `defaults/main.yml`
+None.
 
 Dependencies
 ------------
@@ -23,7 +23,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: shomatan.init }
+         - { role: shomatan.selinux }
 
 License
 -------
@@ -32,3 +32,5 @@ MIT
 
 Author Information
 ------------------
+
+Shoma Nishitateno

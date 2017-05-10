@@ -1,6 +1,6 @@
 galaxy_info:
   author: Shoma Nishitateno
-  description: Installs ansible
+  description: Configures SELinux
   license: "license MIT"
   min_ansible_version: 1.8
   platforms:
