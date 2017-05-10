@@ -10,10 +10,11 @@
 
 - name: Ensure selinux is disabled.
   command: setenforce 0
-  when: ("Disabled" not in result.stdout) and ("Permissive" not in result.stdout)
+  changed_when: ("Disabled" not in result.stdout) and ("Permissive" not in result.stdout)
+  when: selinux_mode == 'disabled'
 
-- name: Ensure selinux is disabled permanently.
+- name: Modify selinux mode permanently.
   lineinfile:
     dest: /etc/selinux/config
     regexp: "^SELINUX=.*"
-    line: "SELINUX=disabled"
+    line: "SELINUX={{ selinux_mode }}"

@@ -11,7 +11,7 @@ None.
 Role Variables
 --------------
 
-None.
+    selinux_mode: disabled
 
 Dependencies
 ------------
